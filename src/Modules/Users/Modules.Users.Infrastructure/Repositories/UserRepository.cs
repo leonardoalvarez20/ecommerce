@@ -1,13 +1,13 @@
-﻿using MongoDB.Driver;
-
-using Modules.Users.Domain.Entities;
+﻿using Modules.Users.Domain.Entities;
 using Modules.Users.Domain.Interfaces;
 using Modules.Users.Infrastructure.Persistence;
+
+using MongoDB.Driver;
 namespace Modules.Users.Infrastructure.Repositories;
 
 public class UserRepository : IUserRepository
 {
-   private readonly IMongoCollection<User> _users;
+    private readonly IMongoCollection<User> _users;
 
     public UserRepository(MongoDBContext dBContext)
     {

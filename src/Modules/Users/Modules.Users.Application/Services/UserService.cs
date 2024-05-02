@@ -4,7 +4,7 @@ using Modules.Users.Domain.Interfaces;
 
 namespace Modules.Users.Application;
 
-public class UserService: IUsersService
+public class UserService : IUsersService
 {
     private readonly IUserRepository _userRepository;
 

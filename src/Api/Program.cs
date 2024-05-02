@@ -1,6 +1,8 @@
 
 using Asp.Versioning;
+
 using Common.Helpers;
+
 using Modules.Users.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,8 +37,8 @@ builder.AddUserModule();
 builder.Services.AddHttpLogging(o => { });
 
 //Make endpoints in slug format and lowercase
-builder.Services.AddRouting(options => 
-{ 
+builder.Services.AddRouting(options =>
+{
     options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
     options.LowercaseUrls = true;
 });

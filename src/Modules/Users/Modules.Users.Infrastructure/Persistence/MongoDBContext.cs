@@ -1,5 +1,6 @@
-﻿using MongoDB.Driver;
-using Modules.Users.Domain.Entities;
+﻿using Modules.Users.Domain.Entities;
+
+using MongoDB.Driver;
 
 namespace Modules.Users.Infrastructure.Persistence;
 

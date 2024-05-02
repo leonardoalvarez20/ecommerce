@@ -1,0 +1,5 @@
+{
+    "dotnet.defaultSolution": "Ecommerce.sln",
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableEditorConfigSupport": true
+}

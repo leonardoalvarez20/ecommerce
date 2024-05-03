@@ -3,6 +3,8 @@ using Asp.Versioning;
 
 using Common.Helpers;
 
+using Microsoft.AspNetCore.HttpLogging;
+
 using Modules.Users.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,7 +36,10 @@ if (builder.Environment.IsDevelopment())
 //Load modules
 builder.AddUserModule();
 
-builder.Services.AddHttpLogging(o => { });
+builder.Services.AddHttpLogging(logging =>
+{
+    logging.LoggingFields = HttpLoggingFields.RequestMethod | HttpLoggingFields.RequestPath | HttpLoggingFields.RequestQuery | HttpLoggingFields.ResponseStatusCode;
+});
 
 //Make endpoints in slug format and lowercase
 builder.Services.AddRouting(options =>

@@ -1,5 +1,3 @@
-using Modules.Users.Endpoints;
-
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 

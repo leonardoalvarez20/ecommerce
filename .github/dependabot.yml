@@ -1,0 +1,26 @@
+version: 2
+
+updates:
+  # Update dependencies for .NET (Backend)
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "dependencies-updating"
+    allow:
+      - dependency-type: "all"
+    labels:
+      - ".Net dependencies"
+      - "backend"
+  
+   # Update dependencies for React (Frontend)
+  - package-ecosystem: "npm"
+    directory: "/src/ecommerce-web-app"
+    schedule:
+      interval: "weekly"
+    target-branch: "dependencies-updating"
+    allow:
+      - dependency-type: "all"
+    labels:
+      - "npm dependencies"
+      - "frontend"

@@ -1,4 +1,4 @@
-name: build and test Dotnet
+name: Build and test ecommerce-backend
 
 on:
   push:
@@ -12,11 +12,13 @@ env:
   DOTNET_VERSION: '8.0.x' # The .NET SDK version to use
 
 jobs:
-  build-and-test:
+  build-and-test-ecommerce-backend:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET Core
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Use .NET Core ${{ env.DOTNET_VERSION }}
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}

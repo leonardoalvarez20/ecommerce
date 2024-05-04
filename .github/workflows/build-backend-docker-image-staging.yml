@@ -33,9 +33,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
-            latest=auto
-            prefix=
-            suffix=
+            latest=true
 
       - name: Build and push Docker image
         id: push

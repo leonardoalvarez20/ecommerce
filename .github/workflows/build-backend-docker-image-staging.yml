@@ -6,10 +6,10 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}-service
 
 jobs:
-  build-and-push-image:
+  build-and-push-staging-image:
     runs-on: ubuntu-latest
     permissions:
       id-token: write

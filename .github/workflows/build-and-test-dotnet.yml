@@ -15,7 +15,9 @@ jobs:
   build-and-test-ecommerce-backend:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
     - name: Use .NET Core ${{ env.DOTNET_VERSION }}
       uses: actions/setup-dotnet@v3
       with:

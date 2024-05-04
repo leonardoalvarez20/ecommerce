@@ -2,6 +2,12 @@ name: Build and test ecommerce-web-app
 
 on:
   push:
+    branches: [ main ]
+    paths: # Runs only when the files with these extensions have changed
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
   pull_request:
     branches: [ main ]
     paths: # Runs only when the files with these extensions have changed

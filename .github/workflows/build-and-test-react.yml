@@ -26,6 +26,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }} 
 
       - name: npm ci, build and test
+        working-directory: src/ecommerce-web-app
         run: |
           npm ci
           npm run build --if-present

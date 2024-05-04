@@ -1,0 +1,30 @@
+name: Build and test ecommerce-web-app
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths: # Runs only when the files with these extensions has changed
+    - '**.js'
+    - '**.jsx'
+    - '**.ts'
+    - '**.tsx'
+
+env:
+  NODE_VERSION: '22.0.x' # Node version to use
+
+job:
+  build-and-test-ecommerce-web-app:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ env.NODE_VERSION }} 
+      uses: actions/setup-node@v4
+      with:
+          node-version: ${{ env.NODE_VERSION }} 
+      - name: npm ci, build and test
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test      
+          

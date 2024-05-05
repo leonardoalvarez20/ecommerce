@@ -16,7 +16,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    if: github.event_name == 'workflow_run' && github.event.workflow == 'Build and test ecommerce-web-app' && github.event.status == 'success'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     permissions:
       contents: write

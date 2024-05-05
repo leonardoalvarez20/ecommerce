@@ -18,6 +18,9 @@ jobs:
 
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
+    defaults:
+      run:
+        working-directory: src/ecommerce-web-app
     permissions:
       contents: write
     concurrency:
@@ -40,7 +43,6 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: npm ci, build and test
-        working-directory: src/ecommerce-web-app
         run: |
           npm ci
           npm run build

@@ -11,6 +11,7 @@ on:
 
 env:
   NODE_VERSION: '22.x'
+  WORKING_DIRECTORY: src/ecommerce-web-app
 
 jobs:
   deploy:
@@ -20,7 +21,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: src/ecommerce-web-app
+        working-directory: ${{ env.WORKING_DIRECTORY }} 
     permissions:
       contents: write
     concurrency:
@@ -47,10 +48,17 @@ jobs:
           npm ci
           npm run build
 
+      - name: Extract commit message
+        id: extract_message
+        run: |
+          COMMIT_MESSAGE=$(jq -r '.head_commit.message' $GITHUB_EVENT_PATH)
+          echo "Commit message is: $COMMIT_MESSAGE"
+          echo "::set-output name=commit_message::$COMMIT_MESSAGE"
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
         with:
-          full_commit_message: ${{ github.event.head_commit.message }}
+          full_commit_message: "${{ steps.extract_message.outputs.commit_message }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ${{ env.WORKING_DIRECTORY }}/build

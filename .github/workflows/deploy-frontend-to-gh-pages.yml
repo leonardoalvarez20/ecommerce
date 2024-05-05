@@ -19,6 +19,10 @@ jobs:
 
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
+    environment:
+      name: staging
+      url: ${{ format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+
     defaults:
       run:
         working-directory: ${{ env.WORKING_DIRECTORY }} 

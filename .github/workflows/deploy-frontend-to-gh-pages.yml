@@ -53,12 +53,12 @@ jobs:
         run: |
           COMMIT_MESSAGE=$(jq -r '.head_commit.message' $GITHUB_EVENT_PATH)
           echo "Commit message is: $COMMIT_MESSAGE"
-          echo "::set-output name=commit_message::$COMMIT_MESSAGE"
+          echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
         with:
-          full_commit_message: "${{ steps.extract_message.outputs.commit_message }}"
+          full_commit_message: $COMMIT_MESSAGE
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ env.WORKING_DIRECTORY }}/build

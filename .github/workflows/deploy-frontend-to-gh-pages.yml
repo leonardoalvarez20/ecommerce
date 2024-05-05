@@ -1,0 +1,53 @@
+name: Deploy frontedn to GH Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows: ["Build and test ecommerce-web-app"]
+    types:
+      - completed
+
+env:
+  NODE_VERSION: '22.x'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'workflow_run' && github.event.workflow == 'Build and test ecommerce-web-app' && github.event.status == 'success'
+
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ env.NODE_VERSION }} 
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }} 
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: npm ci, build and test
+        working-directory: src/ecommerce-web-app
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

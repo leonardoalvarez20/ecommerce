@@ -8,6 +8,8 @@ on:
       - '**.jsx'
       - '**.ts'
       - '**.tsx'
+      - '**/package-lock.json'
+      - '**/package.json'
   pull_request:
     branches: [ main ]
     paths: # Runs only when the files with these extensions have changed
@@ -15,6 +17,8 @@ on:
       - '**.jsx'
       - '**.ts'
       - '**.tsx'
+      - '**/package-lock.json'
+      - '**/package.json'
 
 env:
   NODE_VERSION: '22.x' # Node version to use

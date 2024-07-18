@@ -3,6 +3,7 @@ name: Create new endpoint
 about: Use this template for request the creation of new endpoint
 title: As a Team, we need to create endpoint_name in module_name
 labels: backend, enhancement
+projects: ["leonardoalvarez20/6", "leonardoalvarez20/7"]
 assignees: leonardoalvarez20
 
 ---
